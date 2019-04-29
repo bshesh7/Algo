@@ -44,7 +44,7 @@ for (i=0;i<n;i++)
     exit(0);
   }
 }
-//odd fsaf
+//odd
 for (i=0;i<n;i++)
 {
   dist_odd[i]=(int*) malloc(n*sizeof(int));
@@ -158,50 +158,146 @@ for (i=0;i<n;i++)
 void floydWarshall()
 {
 int i,j,k;
-int newDist;
+int newDist,newDist_odd,newDist_even ;
 
 //
 printf("----------------------------------\n");
 /* Floyd-Warshall */
 for (j=0;j<n;j++)
 {
-  for (i=0;i<n;i++)
-    if (dist[i][j]<oo)
+ printf("------------------- %d ---------------\n",j);
+  for (i=0;i<n;i++){
+    if (dist[i][j]<oo){
       for (k=0;k<n;k++)
-        
-        if (dist[j][k]<oo)
-        {
+      {  
+        	if (dist[j][k]<oo)//if1
+        	{
           	newDist=dist[i][j]+dist[j][k];
-          	//check for main
+          		//check for main
           		if (newDist<dist[i][k])
          	 	{
             			dist[i][k]=newDist;
             			succ[i][k]=succ[i][j];
           		}
           
-          	//check for odd
+          	 	//check for odd
           
           		if(newDist%2 == 1)
           		{
-            			if (newDist<dist_odd[i][k])
-            			{
-            				dist_odd[i][k]=newDist;
-            				succ_odd[i][k]=succ_odd[i][j];
-            			}
+            				if (newDist<dist_odd[i][k])
+            				{
+            					dist_odd[i][k]=newDist;
+            						succ_odd[i][k]=succ[i][j];
+            				}
           		}
-          	//check for even
-          	if(newDist%2 == 0)
+          		//check for even
+          		if(newDist%2 == 0)
           		{
            		 if (newDist<dist_even[i][k])
-           		 {
-            			dist_even[i][k]=newDist;
-            			succ_even[i][k]=succ_even[i][j];
-            		}
-          }
-        }
+            			{
+            				dist_even[i][k]=newDist;
+            					succ_even[i][k]=succ[i][j];
+            			}
+          		}
+        	}//if1
+      }//for
+    }// if
+    
+    //
+    
+   //
+
+
+  }// i1
+//22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+for (i=0;i<n;i++){
+    if (dist_odd[i][j]<oo){
+      for (k=0;k<n;k++)
+      {  
+        	if (dist_odd[j][k]<oo)//if1
+        	{
+          	newDist=dist_odd[i][j]+dist_even[j][k];
+          		//check for main
+          		
+          
+          	 	//check for odd
+          
+          		if(newDist%2 == 1)
+          		{
+            				if (newDist<dist_odd[i][k])
+            				{
+            					dist_odd[i][k]=newDist;
+            						succ_odd[i][k]=succ[i][j];
+            				}
+          		}
+          		newDist=dist_odd[i][j]+dist_odd[j][k];
+          		//check for main
+          		
+          
+          	 	//check for odd
+          
+          		if(newDist%2 == 0)
+          		{
+            				if (newDist<dist_even[i][k])
+            				{
+            					dist_even[i][k]=newDist;
+            						succ_even[i][k]=succ[i][j];
+            				}
+          		}
+          		
+        	}//if1
+      }//for
+    }// if
+}//i2
+
+//i333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+for (i=0;i<n;i++){
+    if (dist_even[i][j]<oo){
+      for (k=0;k<n;k++)
+      {  
+        	if (dist_even[j][k]<oo)//if1
+        	{
+          	newDist=dist_even[i][j]+dist_even[j][k];
+          		//check for main
+          		
+          
+          	 	//check for odd
+          
+          		if(newDist%2 == 0)
+          		{
+            				if (newDist<dist_even[i][k])
+            				{
+            					dist_even[i][k]=newDist;
+            						succ_even[i][k]=succ[i][j];
+            				}
+          		}
+
+                  newDist=dist_even[i][j]+dist_odd[j][k];
+          		//check for main
+          		
+          
+          	 	//check for odd
+          
+          		if(newDist%2 == 1)
+          		{
+            				if (newDist<dist_odd[i][k])
+            				{
+            					dist_odd[i][k]=newDist;
+            						succ_odd[i][k]=succ[i][j];
+            				}
+          		}
+ 
+          		//check for even
+          		
+        	}//if1
+      }//for
+    }// if
+}//i2
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
   printMatrix();
   printf("----------------------------------\n");
-}
+}// j
 }
 
 void printPaths()
