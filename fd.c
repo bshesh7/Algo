@@ -44,7 +44,7 @@ for (i=0;i<n;i++)
     exit(0);
   }
 }
-//odd
+//odd fsaf
 for (i=0;i<n;i++)
 {
   dist_odd[i]=(int*) malloc(n*sizeof(int));
